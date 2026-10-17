@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BotName - Trợ lý đa năng của bạn</title>
+    <title>NoxxyBot - Trợ lý đa năng của bạn</title>
     <style>
         :root {
             --bg-color: #121212;
@@ -99,4 +99,70 @@
             background-color: var(--secondary-color);
             padding: 30px;
             border-radius: 8px;
-            width
+            width: 300px;
+            text-align: center;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            margin-top: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <nav>
+        <div class="logo">NoxxyBot</div>
+        <div class="nav-links">
+            <a href="#home">Trang chủ</a>
+            <a href="#features">Tính năng</a>
+            <a href="#commands">Lệnh</a>
+            <a href="#">Hỗ trợ</a>
+        </div>
+    </nav>
+
+    <!-- Phần Giới thiệu chính -->
+    <section class="hero" id="home">
+        <h1>Nâng tầm Server của bạn</h1>
+        <p>NoxxyBot cung cấp hệ thống quản lý, phát nhạc chất lượng cao, và các tính năng giải trí giúp cộng đồng của bạn luôn sôi động.</p>
+        <a href="#" class="btn">Thêm vào Server ngay</a>
+    </section>
+
+    <!-- Phần Tính năng -->
+    <section class="features" id="features">
+        <div class="feature-card">
+            <h3>🛡️ Quản lý tự động</h3>
+            <p>Hệ thống chống spam, tự động kiểm duyệt từ ngữ và bảo vệ server 24/7 khỏi các cuộc tấn công.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🎵 Âm thanh sắc nét</h3>
+            <p>Phát nhạc từ các nền tảng phổ biến với chất lượng cao nhất mà không bị giật lag.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🎮 Giải trí đa dạng</h3>
+            <p>Tích hợp hệ thống level, tiền tệ ảo và hàng tá mini-game để tương tác với các thành viên.</p>
+        </div>
+    </section>
+
+    <!-- Chân trang -->
+    <footer>
+        <p>&copy; 2026 NoxxyBot. Đã đăng ký bản quyền.</p>
+    </footer>
+
+</body>
+</html>
