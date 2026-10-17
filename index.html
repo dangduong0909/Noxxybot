@@ -70,6 +70,13 @@
             margin: 0 auto 30px;
         }
 
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -79,11 +86,24 @@
             border-radius: 5px;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
+            border: 2px solid var(--primary-color);
         }
 
         .btn:hover {
             background-color: var(--hover-color);
+            border-color: var(--hover-color);
+            transform: translateY(-2px);
+        }
+
+        /* Style cho nút phụ (Music Bot) */
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            color: white;
         }
 
         /* Features Section */
@@ -140,7 +160,15 @@
     <section class="hero" id="home">
         <h1>Elevate Your Server</h1>
         <p>NoxxyBot provides automated management, high-quality music playback, and entertaining features to keep your community active and engaged.</p>
-        <a href="https://discord.com/oauth2/authorize?client_id=1558617518875082812&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank" class="btn">Add bot to server!</a>
+        
+        <!-- Khung chứa 2 nút bấm -->
+        <div class="hero-buttons">
+            <!-- Nút add NoxxyBot chính -->
+            <a href="https://discord.com/oauth2/authorize?client_id=1558617518875082812&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank" class="btn">Add NoxxyBot!</a>
+            
+            <!-- Nút add Music Bot -->
+            <a href="https://discord.com/oauth2/authorize?client_id=1551033318810718295&permissions=8&integration_type=0&scope=bot+applications.commands" target="_blank" class="btn btn-secondary">Add Music Bot!</a>
+        </div>
     </section>
 
     <!-- Features Section -->
