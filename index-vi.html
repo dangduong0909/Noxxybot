@@ -11,7 +11,7 @@
             --primary-color: #5865F2;
             --secondary-color: #23272A;
             --hover-color: #4752C4;
-            --accent-yellow: #ffb703; /* Màu vàng cam giống menu trong ảnh */
+            --accent-yellow: #ffb703;
         }
 
         * {
@@ -47,59 +47,60 @@
             align-items: center;
         }
 
-        .nav-links a {
+        .nav-links > a {
             color: var(--text-color);
             text-decoration: none;
             margin-left: 20px;
             transition: color 0.3s;
+            font-weight: 500;
         }
 
-        .nav-links a:hover {
+        .nav-links > a:hover {
             color: var(--primary-color);
         }
 
-        /* Nút Dropdown Ngôn Ngữ */
+        /* Dropdown CSS */
         .lang-dropdown {
             position: relative;
             display: inline-block;
-            margin-left: 30px;
+            margin-left: 25px;
         }
 
         .lang-btn {
-            background-color: transparent;
+            background-color: #1a1c23;
             color: var(--text-color);
-            padding: 8px 12px;
-            font-size: 14px;
-            border: 1px solid #444;
+            padding: 8px 14px;
+            font-size: 13px;
+            border: 1px solid #333;
             border-radius: 6px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
             font-weight: bold;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
         }
 
         .lang-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #2b2e36;
+            border-color: #555;
         }
 
         .lang-content {
-            display: none; /* Ẩn menu mặc định */
+            display: none;
             position: absolute;
             right: 0;
             top: 100%;
-            margin-top: 8px;
-            background-color: #1a1c23; /* Nền tối cho menu thả xuống */
-            min-width: 220px;
+            margin-top: 10px;
+            background-color: #1a1c23;
+            min-width: 200px;
             border-radius: 8px;
             border: 1px solid #333;
-            box-shadow: 0px 8px 16px rgba(0,0,0,0.6);
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.8);
             z-index: 100;
             overflow: hidden;
         }
 
-        /* Hiển thị menu khi di chuột vào nút */
         .lang-dropdown:hover .lang-content {
             display: block;
         }
@@ -120,16 +121,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.2s;
-            margin: 0 !important; /* Ghi đè margin của .nav-links a */
         }
 
         .lang-content a:hover:not(.lang-active) {
             background-color: rgba(255, 255, 255, 0.05);
         }
 
-        /* Style cho ngôn ngữ đang được chọn */
         .lang-active {
             background-color: var(--accent-yellow) !important;
             color: #000000 !important;
@@ -228,36 +227,33 @@
 </head>
 <body>
 
-    <!-- Navigation Bar -->
     <nav>
         <div class="logo">NoxxyBot</div>
+        
         <div class="nav-links">
             <a href="#home">Trang chủ</a>
             <a href="#features">Tính năng</a>
             <a href="#commands">Lệnh</a>
+            <!-- Tạm thời trỏ về dashboard.html chung, hoặc bạn có thể tạo riêng dashboard-vi.html nếu muốn -->
             <a href="dashboard.html">Bảng điều khiển</a>
             
-            <!-- Menu Dropdown Chọn Ngôn Ngữ -->
             <div class="lang-dropdown">
                 <button class="lang-btn">🇻🇳 VI ⏷</button>
                 <div class="lang-content">
                     <div class="lang-header">NGÔN NGỮ / LANGUAGE</div>
-                    <!-- Mục Tiếng Việt đang active -->
                     <a href="index-vi.html" class="lang-active">
                         <span>🇻🇳 Tiếng Việt</span>
                         <span>✓</span>
                     </a>
-                    <!-- Mục Tiếng Anh -->
                     <a href="index.html">
                         <span>🇺🇸 English</span>
                     </a>
                 </div>
             </div>
-
+            
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <h1>Nâng tầm Server của bạn</h1>
         <p>NoxxyBot cung cấp hệ thống quản lý, phát nhạc chất lượng cao, và các tính năng giải trí giúp cộng đồng của bạn luôn sôi động.</p>
@@ -268,7 +264,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features" id="features">
         <div class="feature-card">
             <h3>🛡️ Quản lý tự động</h3>
@@ -284,7 +279,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 NoxxyBot. Đã đăng ký bản quyền.</p>
     </footer>
