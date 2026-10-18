@@ -11,6 +11,7 @@
             --primary-color: #5865F2;
             --secondary-color: #23272A;
             --hover-color: #4752C4;
+            --accent-yellow: #ffb703;
         }
 
         * {
@@ -41,15 +42,97 @@
             color: var(--primary-color);
         }
 
-        .nav-links a {
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links > a {
             color: var(--text-color);
             text-decoration: none;
             margin-left: 20px;
             transition: color 0.3s;
+            font-weight: 500;
         }
 
-        .nav-links a:hover {
+        .nav-links > a:hover {
             color: var(--primary-color);
+        }
+
+        /* Dropdown CSS */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 25px;
+        }
+
+        .lang-btn {
+            background-color: #1a1c23;
+            color: var(--text-color);
+            padding: 8px 14px;
+            font-size: 13px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background-color: #2b2e36;
+            border-color: #555;
+        }
+
+        .lang-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 10px;
+            background-color: #1a1c23;
+            min-width: 200px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.8);
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .lang-dropdown:hover .lang-content {
+            display: block;
+        }
+
+        .lang-header {
+            padding: 12px 15px;
+            font-size: 11px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #333;
+        }
+
+        .lang-content a {
+            color: var(--text-color);
+            padding: 12px 15px;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .lang-content a:hover:not(.lang-active) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .lang-active {
+            background-color: var(--accent-yellow) !important;
+            color: #000000 !important;
+            font-weight: bold;
         }
 
         /* Hero Section */
@@ -96,7 +179,6 @@
             transform: translateY(-2px);
         }
 
-        /* Style cho nút phụ (Music Bot) */
         .btn-secondary {
             background-color: transparent;
             color: var(--primary-color);
@@ -145,19 +227,32 @@
 </head>
 <body>
 
-    <!-- Navigation Bar -->
     <nav>
         <div class="logo">NoxxyBot</div>
+        
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#features">Features</a>
             <a href="#commands">Commands</a>
-            <!-- Link kết nối sang file dashboard.html -->
             <a href="dashboard.html">Dashboard</a>
+            
+            <div class="lang-dropdown">
+                <button class="lang-btn">🇺🇸 EN ⏷</button>
+                <div class="lang-content">
+                    <div class="lang-header">NGÔN NGỮ / LANGUAGE</div>
+                    <a href="index.html" class="lang-active">
+                        <span>🇺🇸 English</span>
+                        <span>✓</span>
+                    </a>
+                    <a href="index-vi.html">
+                        <span>🇻🇳 Tiếng Việt</span>
+                    </a>
+                </div>
+            </div>
+            
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <h1>Elevate Your Server</h1>
         <p>NoxxyBot provides automated management, high-quality music playback, and entertaining features to keep your community active and engaged.</p>
@@ -168,7 +263,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features" id="features">
         <div class="feature-card">
             <h3>🛡️ Auto Moderation</h3>
@@ -184,7 +278,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 NoxxyBot. All rights reserved.</p>
     </footer>
