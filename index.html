@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -257,8 +256,8 @@
             <a href="verify.html">Verify</a>
             <a href="dashboard.html">Dashboard</a>
             
-            <!-- Đã sửa redirect_uri trỏ thẳng về index.html thay vì callback.html -->
-            <a href="https://discord.com/oauth2/authorize?client_id=1558617238271950868&redirect_uri=https://dangduong0909.github.io/Noxxybot/index.html&response_type=code&scope=identify">
+            <!-- Đã thêm class btn-discord-login và chuẩn Client ID -->
+            <a href="https://discord.com/oauth2/authorize?client_id=1558617238271950868&redirect_uri=https://dangduong0909.github.io/Noxxybot/index.html&response_type=code&scope=identify" class="btn-discord-login">
                 🎮 Login
             </a>
 
@@ -308,7 +307,7 @@
         <p>&copy; 2026 NoxxyBot. All rights reserved.</p>
     </footer>
 
-    <!-- Script bắt mã code đăng nhập từ Discord đặt đúng vị trí trước khi đóng body -->
+    <!-- Script bắt mã code đăng nhập từ Discord -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
