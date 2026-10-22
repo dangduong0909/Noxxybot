@@ -40,17 +40,18 @@
             font-size: 24px;
             font-weight: bold;
             color: var(--primary-color);
+            text-decoration: none;
         }
 
         .nav-links {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
         .nav-links > a {
             color: var(--text-color);
             text-decoration: none;
-            margin-left: 20px;
             transition: color 0.3s;
             font-weight: 500;
         }
@@ -59,11 +60,30 @@
             color: var(--primary-color);
         }
 
+        /* Discord Login Button Style */
+        .btn-discord-login {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-discord-login:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-1px);
+        }
+
         /* Dropdown CSS */
         .lang-dropdown {
             position: relative;
             display: inline-block;
-            margin-left: 25px;
         }
 
         .lang-btn {
@@ -228,14 +248,19 @@
 <body>
 
     <nav>
-        <div class="logo">NoxxyBot</div>
+        <a href="index.html" class="logo">NoxxyBot</a>
         
         <div class="nav-links">
-            <a href="#home">Home</a>
+            <a href="index.html">Home</a>
             <a href="#features">Features</a>
-            <a href="#commands">Commands</a>
+            <a href="verify.html">Verify</a>
             <a href="dashboard.html">Dashboard</a>
             
+            <!-- Nút Login Discord (Thay thế Client ID của bạn vào link bên dưới khi cần) -->
+            <a href="https://discord.com/api/oauth2/authorize?client_id=1558617518875082812&redirect_uri=https://dangduong0909.github.io/Noxxybot/callback.html&response_type=code&scope=identify" class="btn-discord-login">
+                🎮 Login
+            </a>
+
             <div class="lang-dropdown">
                 <button class="lang-btn">🇺🇸 EN ⏷</button>
                 <div class="lang-content">
