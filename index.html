@@ -245,6 +245,21 @@
         }
     </style>
 </head>
+        <script>
+        // Tự động bắt mã code đăng nhập từ Discord cho bản tiếng Anh
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+
+            if (code) {
+                localStorage.setItem("discord_logged_in", "true");
+                alert("Successfully logged in with Discord!");
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+    </script>
+</body>
+</html>
 <body>
 
     <nav>
