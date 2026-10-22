@@ -239,7 +239,7 @@
 
         /* Modal / Popup CSS */
         .modal-overlay {
-            display: none; /* Mặc định ẩn */
+            display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7);
@@ -249,7 +249,7 @@
             backdrop-filter: blur(4px);
         }
 
-        .modal-overlay.active { display: flex; } /* Hiện popup khi có class active */
+        .modal-overlay.active { display: flex; }
 
         .modal-content {
             background: var(--bg-card);
@@ -330,10 +330,10 @@
                 <li class="nav-item">🏠 Back to Home</li>
             </a>
             <li class="nav-item active">📊 Overview</li>
-            <li class="nav-item">🍯 Honeypot</li>
-            <li class="nav-item">🎫 Support Tickets</li>
+            <a href="verify.html" style="text-decoration: none; color: inherit;">
+                <li class="nav-item">🔑 Key Verification</li>
+            </a>
             <li class="nav-item">🛡️ Anti-Nuke & Raid</li>
-            <li class="nav-item">⚡ Slash Commands</li>
         </ul>
     </aside>
 
@@ -353,33 +353,33 @@
                 </div>
                 <div class="user-menu">
                     <a href="#">⚙️ Account Settings</a>
-                    <a href="#">📝 Audit Log</a>
+                    <a href="verify.html">🔑 Verify Portal</a>
                     <a href="index.html" class="logout">🚪 Logout</a>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Stats Grid -->
+        <!-- Quick Stats Grid (Đã tích hợp lấy dữ liệu từ Bot API) -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon icon-blue">👥</div>
+                <div class="stat-icon icon-blue">🟢</div>
                 <div class="stat-info">
-                    <h3>2,451</h3>
-                    <p>Total Members</p>
+                    <h3 id="apiStatusText">Connecting...</h3>
+                    <p>API Server Status</p>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon icon-green">⚡</div>
+                <div class="stat-icon icon-green">🔌</div>
                 <div class="stat-info">
-                    <h3>32ms</h3>
-                    <p>Bot Latency (Ping)</p>
+                    <h3 id="apiPortText">--</h3>
+                    <p>Configured Port</p>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon icon-orange">🍯</div>
+                <div class="stat-icon icon-orange">⚡</div>
                 <div class="stat-info">
-                    <h3>128</h3>
-                    <p>Bots Caught Today</p>
+                    <h3>Online</h3>
+                    <p>Bot Status</p>
                 </div>
             </div>
         </div>
@@ -389,17 +389,16 @@
             
             <div class="module-card">
                 <div class="card-header">
-                    <div class="card-title">🍯 Bot & Spam Honeypot</div>
+                    <div class="card-title">🔑 Key & License Auth</div>
                     <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
                 </div>
-                <p class="card-desc">Smart system that creates hidden channels to automatically catch and punish spam/raid bots.</p>
+                <p class="card-desc">Manage your Roblox script licenses, whitelisted users, and secure hardware ID bindings.</p>
                 <ul class="feature-list">
-                    <li>Smart hidden trap channels</li>
-                    <li>Automated punishments (Kick, Ban)</li>
-                    <li>Intuitive message interface</li>
+                    <li>Secure HWID device binding</li>
+                    <li>Automatic token & key expiry</li>
+                    <li>Direct link to web verification</li>
                 </ul>
-                <!-- Bấm nút này sẽ gọi hàm mở Modal -->
-                <button class="btn-config" onclick="openModal()">Configure Honeypot</button>
+                <button class="btn-config" onclick="location.href='verify.html'">Open Verify Page</button>
             </div>
 
             <div class="module-card">
@@ -432,12 +431,11 @@
         </div>
     </main>
 
-    <!-- Modal Popup Cài Đặt (Mặc định bị ẩn) -->
+    <!-- Modal Popup Cài Đặt -->
     <div class="modal-overlay" id="configModal">
         <div class="modal-content">
             <div class="modal-header">
                 Module Settings
-                <!-- Nút X để đóng Modal -->
                 <button class="close-btn" onclick="closeModal()">×</button>
             </div>
             
@@ -459,7 +457,7 @@
         </div>
     </div>
 
-    <!-- JavaScript để điều khiển tắt/mở Modal -->
+    <!-- JavaScript điều khiển Modal và kết nối API Bot -->
     <script>
         function openModal() {
             document.getElementById("configModal").classList.add("active");
@@ -468,6 +466,26 @@
         function closeModal() {
             document.getElementById("configModal").classList.remove("active");
         }
+
+        // Tự động fetch dữ liệu từ API của bot trên Orihost khi mở Dashboard
+        async function fetchBotStats() {
+            try {
+                const response = await fetch("http://176.100.37.91:30014/health");
+                const data = await response.json();
+                if (data.ok) {
+                    document.getElementById("apiStatusText").innerText = "Online 🟢";
+                    document.getElementById("apiPortText").innerText = data.configured_port;
+                } else {
+                    document.getElementById("apiStatusText").innerText = "Offline 🔴";
+                }
+            } catch (error) {
+                document.getElementById("apiStatusText").innerText = "Error 🔴";
+                console.error("Failed to connect to Bot API:", error);
+            }
+        }
+
+        // Chạy kiểm tra ngay khi load trang
+        fetchBotStats();
     </script>
 
 </body>
