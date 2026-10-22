@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoxxyBot - Key Verification</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --primary-color: #5865F2;
+            --secondary-color: #23272A;
+            --hover-color: #4752C4;
+            --accent-yellow: #ffb703;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: var(--secondary-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links > a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links > a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Container */
+        .verify-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .verify-card {
+            background-color: var(--secondary-color);
+            padding: 40px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .verify-card h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #b9bbbe;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #2f3136;
+            border-radius: 6px;
+            background-color: #1a1c23;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-1px);
+        }
+
+        #resultMessage {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar mẫu đồng bộ với các trang khác -->
+    <nav>
+        <a href="index.html" class="logo">NoxxyBot</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="verify.html" style="color: var(--primary-color);">Verify Key</a>
+        </div>
+    </nav>
+
+    <!-- Khung Form Xác Thực -->
+    <div class="verify-container">
+        <div class="verify-card">
+            <h2>License Verification</h2>
+            <div class="form-group">
+                <label for="licenseKey">License Key</label>
+                <input type="text" id="licenseKey" placeholder="NOXXY-XXXX-XXXX-XXXX">
+            </div>
+            <div class="form-group">
+                <label for="userId">Roblox User ID</label>
+                <input type="text" id="userId" placeholder="Enter numeric ID">
+            </div>
+            <div class="form-group">
+                <label for="hwid">Device HWID</label>
+                <input type="text" id="hwid" placeholder="Enter hardware ID">
+            </div>
+            <button class="btn-submit" onclick="verifyLicense()">Authorize</button>
+            <div id="resultMessage"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 NoxxyBot. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript kết nối trực tiếp đến Bot/API trên Orihost -->
+    <script>
+        async function verifyLicense() {
+            const licenseKey = document.getElementById('licenseKey').value.trim();
+            const userId = document.getElementById('userId').value.trim();
+            const hwid = document.getElementById('hwid').value.trim();
+            const resultMessage = document.getElementById('resultMessage');
+
+            if (!licenseKey || !userId || !hwid) {
+                resultMessage.style.color = '#ffb703';
+                resultMessage.innerText = "Please fill in all fields.";
+                return;
+            }
+
+            resultMessage.style.color = '#ffb703';
+            resultMessage.innerText = "Verifying with server...";
+
+            try {
+                const response = await fetch("http://176.100.37.91:30014/v1/auth/verify", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        license_key: licenseKey,
+                        user_id: userId,
+                        hwid: hwid
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.ok) {
+                    resultMessage.style.color = '#4ade80';
+                    resultMessage.innerText = "Success: " + data.message;
+                } else {
+                    resultMessage.style.color = '#f87171';
+                    resultMessage.innerText = "Denied: " + data.message;
+                }
+            } catch (error) {
+                resultMessage.style.color = '#f87171';
+                resultMessage.innerText = "Connection error to API server!";
+                console.error("Error:", error);
+            }
+        }
+    </script>
+</body>
+</html>
