@@ -60,6 +60,26 @@
             color: var(--primary-color);
         }
 
+        /* Discord Login Button Style */
+        .btn-discord-login {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-discord-login:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-1px);
+        }
+
         /* Dropdown CSS */
         .lang-dropdown {
             position: relative;
@@ -236,6 +256,11 @@
             <a href="verify.html">Xác thực Key</a>
             <a href="dashboard.html">Bảng điều khiển</a>
             
+            <!-- Nút Đăng nhập Discord trỏ về chính index-vi.html -->
+            <a href="https://discord.com/api/oauth2/authorize?client_id=1558617518875082812&redirect_uri=https://dangduong0909.github.io/Noxxybot/index-vi.html&response_type=code&scope=identify" class="btn-discord-login">
+                🎮 Đăng nhập
+            </a>
+
             <div class="lang-dropdown">
                 <button class="lang-btn">🇻🇳 VI ⏷</button>
                 <div class="lang-content">
@@ -282,5 +307,18 @@
         <p>&copy; 2026 NoxxyBot. Đã đăng ký bản quyền.</p>
     </footer>
 
+    <!-- Script tự động bắt mã code đăng nhập từ Discord cho bản tiếng Việt -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+
+            if (code) {
+                localStorage.setItem("discord_logged_in", "true");
+                alert("Đăng nhập Discord thành công!");
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+    </script>
 </body>
 </html>
