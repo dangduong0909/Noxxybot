@@ -349,17 +349,17 @@
             <!-- User Dropdown Menu -->
             <div class="user-dropdown">
                 <div class="user-profile">
-                    👤 <span>Admin ⏷</span>
+                    👤 <span id="navUsername">Admin ⏷</span>
                 </div>
                 <div class="user-menu">
                     <a href="#">⚙️ Account Settings</a>
                     <a href="verify.html">🔑 Verify Portal</a>
-                    <a href="index.html" class="logout">🚪 Logout</a>
+                    <a href="#" onclick="logoutUser(event)" class="logout">🚪 Logout</a>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Stats Grid (Đã tích hợp lấy dữ liệu từ Bot API) -->
+        <!-- Quick Stats Grid -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon icon-blue">🟢</div>
@@ -457,7 +457,7 @@
         </div>
     </div>
 
-    <!-- JavaScript điều khiển Modal và kết nối API Bot -->
+    <!-- JavaScript xử lý Modal, Auth và API Orihost -->
     <script>
         function openModal() {
             document.getElementById("configModal").classList.add("active");
@@ -467,7 +467,35 @@
             document.getElementById("configModal").classList.remove("active");
         }
 
-        // Tự động fetch dữ liệu từ API của bot trên Orihost khi mở Dashboard
+        // Xử lý thông tin user đăng nhập qua Discord OAuth2
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+
+            if (code) {
+                localStorage.setItem("discord_logged_in", "true");
+                localStorage.setItem("discord_username", "NoxxyAdmin");
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
+            const isLoggedIn = localStorage.getItem("discord_logged_in");
+            if (isLoggedIn === "true") {
+                const username = localStorage.getItem("discord_username") || "Admin";
+                const navUsername = document.getElementById("navUsername");
+                if (navUsername) {
+                    navUsername.innerText = username + " ⏷";
+                }
+            }
+        });
+
+        // Xử lý nút đăng xuất
+        function logoutUser(e) {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+
+        // Tự động fetch dữ liệu từ API của bot trên Orihost
         async function fetchBotStats() {
             try {
                 const response = await fetch("http://176.100.37.91:30014/health");
@@ -484,7 +512,6 @@
             }
         }
 
-        // Chạy kiểm tra ngay khi load trang
         fetchBotStats();
     </script>
 
