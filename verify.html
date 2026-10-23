@@ -216,7 +216,7 @@
         <p>&copy; 2026 NoxxyBot. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript kết nối trực tiếp đến Bot/API trên Orihost và bắt OAuth2 code -->
+    <!-- JavaScript kết nối trực tiếp đến Bot/API trên Orihost (cổng 8080) -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -245,7 +245,8 @@
             resultMessage.innerText = "Verifying with server...";
 
             try {
-                const response = await fetch("http://176.100.37.91:30014/v1/auth/verify", {
+                // Đã cập nhật cổng chính xác 8080 theo log Uvicorn của Orihost
+                const response = await fetch("http://176.100.37.91:8080/v1/auth/verify", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
