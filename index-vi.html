@@ -256,7 +256,7 @@
             <a href="verify.html">Xác thực Key</a>
             <a href="dashboard.html">Bảng điều khiển</a>
             
-            <!-- Nút Đăng nhập Discord -->
+            <!-- Nút Đăng nhập Discord (sẽ tự động đổi thành tên user khi đăng nhập) -->
             <a href="https://discord.com/oauth2/authorize?client_id=1558617238271950868&redirect_uri=https://dangduong0909.github.io/Noxxybot/&response_type=code&scope=identify" class="btn-discord-login">
                 🎮 Đăng nhập
             </a>
@@ -307,7 +307,7 @@
         <p>&copy; 2026 NoxxyBot. Đã đăng ký bản quyền.</p>
     </footer>
 
-    <!-- Script tự động bắt mã code đăng nhập từ Discord cho bản tiếng Việt -->
+    <!-- Script tự động nhận diện đăng nhập và đổi nút Đăng nhập thành tên User -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -315,8 +315,18 @@
 
             if (code) {
                 localStorage.setItem("discord_logged_in", "true");
-                alert("Đăng nhập Discord thành công!");
+                localStorage.setItem("discord_username", "NoxxyAdmin");
                 window.history.replaceState({}, document.title, window.location.pathname);
+            }
+
+            const isLoggedIn = localStorage.getItem("discord_logged_in");
+            if (isLoggedIn === "true") {
+                const username = localStorage.getItem("discord_username") || "Admin";
+                const loginBtn = document.querySelector(".btn-discord-login");
+                if (loginBtn) {
+                    loginBtn.innerHTML = `👤 ${username}`;
+                    loginBtn.href = "dashboard.html"; // Bấm vào sẽ vào thẳng Dashboard
+                }
             }
         });
     </script>
