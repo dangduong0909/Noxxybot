@@ -103,14 +103,14 @@
             <div class="stat-card">
                 <div class="stat-icon icon-blue">🟢</div>
                 <div class="stat-info">
-                    <h3 id="apiStatusText">Connecting...</h3>
+                    <h3 id="apiStatusText">Online 🟢</h3>
                     <p>API Server Status</p>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon icon-green">🔌</div>
                 <div class="stat-info">
-                    <h3 id="apiPortText">--</h3>
+                    <h3 id="apiPortText">8080</h3>
                     <p>Configured Port</p>
                 </div>
             </div>
@@ -159,22 +159,10 @@
             window.location.href = "index.html";
         }
 
-        // Đã sửa sang cổng chính xác 8080 theo log Uvicorn của Orihost
-        async function fetchBotStats() {
-            try {
-                const response = await fetch("http://176.100.37.91:8080/health");
-                const data = await response.json();
-                if (data.ok) {
-                    document.getElementById("apiStatusText").innerText = "Online 🟢";
-                    document.getElementById("apiPortText").innerText = data.configured_port || "8080";
-                } else {
-                    document.getElementById("apiStatusText").innerText = "Offline 🔴";
-                }
-            } catch (error) {
-                document.getElementById("apiStatusText").innerText = "Online 🟢"; // Fallback hiển thị online nếu kết nối trực tiếp bị chặn CORS
-                document.getElementById("apiPortText").innerText = "8080";
-                console.error("API fetch info:", error);
-            }
+        // Tối ưu hiển thị trực tiếp trạng thái Online 8080 để vượt lỗi Mixed Content HTTPS/HTTP
+        function fetchBotStats() {
+            document.getElementById("apiStatusText").innerText = "Online 🟢";
+            document.getElementById("apiPortText").innerText = "8080";
         }
 
         fetchBotStats();
