@@ -49,18 +49,38 @@
         .nav-links {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
         .nav-links > a {
             color: var(--text-color);
             text-decoration: none;
-            margin-left: 20px;
             transition: color 0.3s;
             font-weight: 500;
         }
 
         .nav-links > a:hover {
             color: var(--primary-color);
+        }
+
+        /* Discord Login Button Style */
+        .btn-discord-login {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn-discord-login:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-1px);
         }
 
         /* Main Container */
@@ -156,13 +176,18 @@
 </head>
 <body>
 
-    <!-- Navbar mẫu đồng bộ với các trang khác -->
+    <!-- Navbar đồng bộ đầy đủ các trang và nút Login Discord -->
     <nav>
         <a href="index.html" class="logo">NoxxyBot</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="dashboard.html">Dashboard</a>
             <a href="verify.html" style="color: var(--primary-color);">Verify Key</a>
+            
+            <!-- Nút Login Discord -->
+            <a href="https://discord.com/oauth2/authorize?client_id=1558617238271950868&redirect_uri=https://dangduong0909.github.io/Noxxybot/&response_type=code&scope=identify" class="btn-discord-login">
+                🎮 Login
+            </a>
         </div>
     </nav>
 
@@ -191,8 +216,19 @@
         <p>&copy; 2026 NoxxyBot. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript kết nối trực tiếp đến Bot/API trên Orihost -->
+    <!-- JavaScript kết nối trực tiếp đến Bot/API trên Orihost và bắt OAuth2 code -->
     <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+
+            if (code) {
+                localStorage.setItem("discord_logged_in", "true");
+                alert("Successfully logged in with Discord!");
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+
         async function verifyLicense() {
             const licenseKey = document.getElementById('licenseKey').value.trim();
             const userId = document.getElementById('userId').value.trim();
