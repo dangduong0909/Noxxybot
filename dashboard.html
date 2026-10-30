@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
@@ -72,11 +71,9 @@
     <script>
         lucide.createIcons();
 
-        // Hàm gọi API từ Orihost
         async function fetchDashboardData() {
             try {
-                // Nhớ thay thế link bên dưới bằng domain/URL thật của bạn trên Orihost nhé
-                let response = await fetch('https://your-orihost-domain.com/api/stats');
+                let response = await fetch('http://176.100.37.91:30014/api/stats');
                 let data = await response.json();
                 
                 document.getElementById('total-whitelisted').innerText = data.whitelisted;
@@ -88,7 +85,6 @@
             }
         }
 
-        // Chạy ngay khi load trang và lặp lại mỗi 30 giây
         fetchDashboardData();
         setInterval(fetchDashboardData, 30000);
     </script>
