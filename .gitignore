@@ -1,7 +1,0 @@
-# Bỏ qua file biến môi trường chứa Client Secret và Bot Token
-.env
-
-# Bỏ qua thư viện node_modules và các file log tạm
-node_modules/
-*.log
-.DS_Store
